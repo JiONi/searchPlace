@@ -1,24 +1,10 @@
 package com.example.sesarchingplace.controller;
 
-import com.example.sesarchingplace.DAO.MemberDAO;
-import com.example.sesarchingplace.DAO.SearchKeywordDAO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HomeController {
-
-    @Autowired
-    MemberDAO memberDAO;
-
-    @Autowired
-    SearchKeywordDAO searchKeywordDAO;
-
-    @Autowired
-    BCryptPasswordEncoder passwordEncoder;
-
     @RequestMapping(value="/login", method=RequestMethod.GET)
     public String loginPage(){
         return "login";
