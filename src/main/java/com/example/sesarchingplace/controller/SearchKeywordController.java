@@ -34,13 +34,13 @@ public class SearchKeywordController {
         ModelAndView mv = new ModelAndView("jsonView");
         mv.addObject("top10KeywordList", searchKeywordList);
 
+
         return mv;
     }
 
     @RequestMapping(value="/search/saveSearchKeyword.json", produces = "application/json", method=RequestMethod.POST)
     @ResponseBody
     public void saveSearchKeyword(Authentication authentication, @RequestParam(value="keyword") String keyword){
-
         searchKeywordService.searchKeywordSave(authentication, keyword);
     }
 }

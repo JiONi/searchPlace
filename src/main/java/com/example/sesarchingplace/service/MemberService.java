@@ -19,7 +19,6 @@ public class MemberService{
     BCryptPasswordEncoder passwordEncoder;
 
     public MemberUser getMemberByUserId(String userId) {
-        //MemberUser memberUser = memberDAO.getOne(userId);
         Optional<MemberUser> memberUserList = memberDAO.findById(userId);
         if(!memberUserList.isPresent()){
             return null;
@@ -28,8 +27,10 @@ public class MemberService{
         }
     }
 
-    public void memberUserSave(MemberUser memberUser){
-        memberUser.setUserPw(passwordEncoder.encode(memberUser.getUserPw()));
+    public void memberUserSave(String userId, String userPw){
+        MemberUser memberUser = new MemberUser();
+        memberUser.setUserId(userId);
+        memberUser.setUserPw(passwordEncoder.encode(userPw));
         memberDAO.save(memberUser);
     }
 }

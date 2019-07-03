@@ -3,6 +3,7 @@ package com.example.sesarchingplace.component;
 import com.example.sesarchingplace.config.MyAuthentication;
 import com.example.sesarchingplace.entity.MemberUser;
 import com.example.sesarchingplace.service.MemberService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class AuthComponent implements AuthenticationProvider {
 
     @Autowired
@@ -34,11 +36,14 @@ public class AuthComponent implements AuthenticationProvider {
     }
 
     private Authentication authenticate(String id, String pw) throws AuthenticationException {
-        MemberUser memberUser = new MemberUser(id, pw);
+        MemberUser memberUser = new MemberUser();
+        memberUser.setUserId(id);
+        memberUser.setUserPw(pw);
+
         memberUser = memberService.getMemberByUserId(id);
         if(memberUser == null || !passwordEncoder.matches(pw, memberUser.getUserPw())){
+            log.error("로그인 실패");
             throw new AuthenticationCredentialsNotFoundException(id);
-
         }
 
         List<GrantedAuthority> auth = new ArrayList<>();

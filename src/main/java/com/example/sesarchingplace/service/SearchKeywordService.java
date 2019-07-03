@@ -40,8 +40,8 @@ public class SearchKeywordService {
         Optional<SearchKeyword> searchKeyword = searchKeywordDAO.findById(pk);
 
         SearchKeyword nowSearchKeyword = new SearchKeyword();
-        nowSearchKeyword.setKeyword(keyword);
-        nowSearchKeyword.setUserId(authentication.getName());
+        nowSearchKeyword.getPk().setKeyword(keyword);
+        nowSearchKeyword.getPk().setUserId(authentication.getName());
 
         if(searchKeyword.isPresent()){  // 검색이력이 존재하면 검색 수 +1
             nowSearchKeyword.setSearchCnt(searchKeyword.get().getSearchCnt()+1);

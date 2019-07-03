@@ -123,13 +123,20 @@
 <script>
     function drawTop10Keyword(data){
         var html = "";
-        for(var i=1; i<=data.top10KeywordList.length; i++){
+        if(data.top10KeywordList.length > 0){
+            for(var i=1; i<=data.top10KeywordList.length; i++){
+                html += "<tr>";
+                html += "<td>"+i+"</td>";
+                html += "<td>"+data.top10KeywordList[i-1][1]+"</td>";
+                html += "<td>"+data.top10KeywordList[i-1][0]+"</td>";
+                html += "</tr>";
+            }
+        }else{
             html += "<tr>";
-            html += "<td>"+i+"</td>";
-            html += "<td>"+data.top10KeywordList[i-1][1]+"</td>";
-            html += "<td>"+data.top10KeywordList[i-1][0]+"</td>";
+            html += "<td colspan='3' style='text-align: center;'>인기 키워드 목록이 존재하지 않습니다</td>";
             html += "</tr>";
         }
+
 
         $("#top10Keyword").html(html);
     }

@@ -2,12 +2,14 @@ package com.example.sesarchingplace.controller;
 
 import com.example.sesarchingplace.entity.MemberUser;
 import com.example.sesarchingplace.service.MemberService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
 @RestController
+@Slf4j
 public class MemberUserController {
     @Autowired
     MemberService memberService;
@@ -15,8 +17,7 @@ public class MemberUserController {
     @RequestMapping(value="/join/process.json", produces = "application/json", method= RequestMethod.POST)
     @ResponseBody
     public void joinMember(@RequestParam(value="userId") String userId, @RequestParam(value="userPw") String userPw){
-        MemberUser memberUser = new MemberUser(userId, userPw);
-        memberService.memberUserSave(memberUser);
+        memberService.memberUserSave(userId, userPw);
     }
 
     @RequestMapping(value="/join/idDupCheck.json", method=RequestMethod.POST)
@@ -27,6 +28,7 @@ public class MemberUserController {
         MemberUser memberUser = memberService.getMemberByUserId(userId);
 
         if(memberUser != null){
+            log.info("중복된 아이디 존재 : "+userId);
             result = 1;
         }
 

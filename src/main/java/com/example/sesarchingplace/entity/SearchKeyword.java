@@ -1,11 +1,13 @@
 package com.example.sesarchingplace.entity;
 
 import com.example.sesarchingplace.config.LocalDateTimeAttributeConverter;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name="SEARCH_KEYWORD")
 public class SearchKeyword {
 
@@ -20,28 +22,4 @@ public class SearchKeyword {
     @Column(nullable = false)
     private int searchCnt;
 
-    public String getUserId(){
-        return pk.getUserId();
-    }
-    public void setUserId(String userId){
-        pk.setUserId(userId);
-    }
-
-    public String getKeyword(){
-        return pk.getKeyword();
-    }
-    public void setKeyword(String keyword){
-        pk.setKeyword(keyword);
-    }
-
-    public LocalDateTime getUdtDate(){
-        return this.udtDate;
-    }
-
-    public int getSearchCnt(){
-        return this.searchCnt;
-    }
-    public void setSearchCnt(int searchCnt){
-        this.searchCnt = searchCnt;
-    }
 }
