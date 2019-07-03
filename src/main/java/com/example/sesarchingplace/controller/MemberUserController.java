@@ -1,15 +1,11 @@
 package com.example.sesarchingplace.controller;
 
-import com.example.sesarchingplace.DAO.MemberDAO;
 import com.example.sesarchingplace.entity.MemberUser;
 import com.example.sesarchingplace.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Optional;
 
 @RestController
 public class MemberUserController {
