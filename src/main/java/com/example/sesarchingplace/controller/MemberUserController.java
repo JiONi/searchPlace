@@ -14,14 +14,14 @@ public class MemberUserController {
 
     @RequestMapping(value="/join/process.json", produces = "application/json", method= RequestMethod.POST)
     @ResponseBody
-    public void joinMember(@RequestParam(value="userId") String userId, @RequestParam(value="userPw") String userPw) throws Exception{
+    public void joinMember(@RequestParam(value="userId") String userId, @RequestParam(value="userPw") String userPw){
         MemberUser memberUser = new MemberUser(userId, userPw);
         memberService.memberUserSave(memberUser);
     }
 
     @RequestMapping(value="/join/idDupCheck.json", method=RequestMethod.POST)
     @ResponseBody
-    public int idDupCheck(@RequestParam(value="userId") String userId) throws Exception{
+    public int idDupCheck(@RequestParam(value="userId") String userId){
         int result = 0;
 
         MemberUser memberUser = memberService.getMemberByUserId(userId);

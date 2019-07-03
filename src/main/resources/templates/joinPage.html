@@ -51,6 +51,19 @@
 <script>
 
     $("#joinCompleteBtn").on("click", function(){
+        var userId = $("input[name='userId']").val();
+        var userPw = $("input[name='userPw']").val();
+
+        if(userId == null || userId == ""){
+            alert("아이디를 입력해주세요");
+            return false;
+        }
+
+        if(userPw == null || userPw == ""){
+            alert("패스워드를 입력해주세요");
+            return false;
+        }
+
         var data = {'userId' : $("input[name='userId']").val()};
         $.ajax({
             url : '/join/idDupCheck.json',

@@ -23,7 +23,7 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top" id="navigation">
 
-    <a class="navbar-brand mr-1" href="index.html">장소 검색 서비스</a>
+    <a class="navbar-brand mr-1" href="/">장소 검색 서비스</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -121,7 +121,6 @@
 <script src="/static/js/sb-admin.min.js"></script>
 
 <script>
-    var jsonData = null;
     function drawTop10Keyword(data){
         var html = "";
         for(var i=1; i<=data.top10KeywordList.length; i++){
@@ -135,89 +134,18 @@
         $("#top10Keyword").html(html);
     }
 
-    $.ajax({
-        url : '/search/top10Keywords.json',
-        type : 'get',
-        dataType : 'json',
-        success : function(data){
-            console.log(data.top10KeywordList);
-            drawTop10Keyword(data);
-        }
+    $(document).ready(function(){
+        $.ajax({
+            url : '/search/top10Keywords.json',
+            type : 'get',
+            dataType : 'json',
+            success : function(data){
+                drawTop10Keyword(data);
+            }
+        });
     })
+
 </script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <meta charset="UTF-8">
-    <title>나의 검색 히스토리</title>
-</head>
-<body>
-    <h2>나의 검색 히스토리</h2>
-<div>
-    <table>
-        <thead>
-            <th>키워드</th>
-            <th>검색 일시</th>
-        </thead>
-        <tbody id="historyList">
-        </tbody>
-    </table>
-</div>
-</body>
-<script>
-    $.ajax({
-        url : '/search/getMySearchHistory.json',
-        type : 'post',
-        dataType : 'json',
-        success : function(data){
-            console.log(data);
-            drawHistory(data.searchKeywordList);
-        }
-    })
-
-    function drawHistory(data){
-        var html = "";
-        for(var i=0; i<data.length; i++){
-            html += "<tr>";
-            html += "<td>"+data[i].keyword+"</td>";
-            html += "<td>"+data[i].udtDate[0]+"."+data[i].udtDate[1]+"."+data[i].udtDate[2]+" "+data[i].udtDate[3]+":"+data[i].udtDate[4]+":"+data[i].udtDate[5]+"</td>";
-            html += "</tr>";
-        }
-
-        $("#historyList").html(html);
-    }
-
-    $.ajax({
-        url : '/search/top10Keywords.json',
-        type : 'get',
-        dataType : 'json',
-        success : function(data){
-            console.log(data);
-        }
-    })
-</script>
-</html>-->

@@ -15,7 +15,8 @@ public class SearchKeywordController {
     SearchKeywordService searchKeywordService;
 
     @RequestMapping(value="/search/getMySearchHistory.json", method= RequestMethod.POST)
-    public ModelAndView getMySearchHistory(Authentication authentication) throws Exception {
+    @ResponseBody
+    public ModelAndView getMySearchHistory(Authentication authentication){
 
         List<SearchKeyword> searchKeywordList = searchKeywordService.mySearchHistoryList(authentication);
 
@@ -26,6 +27,7 @@ public class SearchKeywordController {
     }
 
     @RequestMapping(value="/search/top10Keywords.json", method=RequestMethod.GET)
+    @ResponseBody
     public ModelAndView top10Keywords() {
         List<SearchKeyword> searchKeywordList = searchKeywordService.top10Keywords();
 
@@ -37,7 +39,7 @@ public class SearchKeywordController {
 
     @RequestMapping(value="/search/saveSearchKeyword.json", produces = "application/json", method=RequestMethod.POST)
     @ResponseBody
-    public void saveSearchKeyword(Authentication authentication, @RequestParam(value="keyword") String keyword) throws Exception{
+    public void saveSearchKeyword(Authentication authentication, @RequestParam(value="keyword") String keyword){
 
         searchKeywordService.searchKeywordSave(authentication, keyword);
     }
